@@ -10,7 +10,7 @@ export const App = () => {
     return (
         <div>
             <Route exact path="/" component={TodoListContainer}/>
-            <Route path="/todos/:id/" component={EditContainer}/>
+            <Route path="/todo/:id/" component={EditContainer}/>
         </div>
     );
 }

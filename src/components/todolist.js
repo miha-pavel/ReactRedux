@@ -13,7 +13,7 @@ const TodoListComponent = ({ todos, deleteTodo, selectTodo }) => {
                     <li key={todo.id}>
                         {todo.name}
                         <button onClick={deleteTodo.bind(this, todo)}>Удалить</button>
-                        <Link to={`/todos/${todo.id}/`}>
+                        <Link to={`/todo/${todo.id}/`}>
                             <button onClick={selectTodo.bind(this, todo)}>Редактировать</button>
                         </Link>
                     </li>

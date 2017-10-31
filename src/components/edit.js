@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 
-const EditComponent = ({state, handleNameChange, saveTodo}) => {
+const EditComponent = ({name, handleNameChange, saveTodo}) => {
     return (
         <div>
-            <textarea onChange={handleNameChange} value={state.name} defaultValue={state.name}></textarea>
+            <textarea onChange={handleNameChange} value={name}></textarea>
             <Link to={`/`}>
                 <button onClick={saveTodo}>Сохрaнить</button>
             </Link>
@@ -17,7 +17,7 @@ const EditComponent = ({state, handleNameChange, saveTodo}) => {
 EditComponent.propTypes = {
     saveTodo: PropTypes.func.isRequired,
     handleNameChange: PropTypes.func.isRequired,
-    state: PropTypes.object.isRequired,
+    name: PropTypes.string.isRequired,
 };
 
 export default EditComponent;

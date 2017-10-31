@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const AddComponent = ({ name, handleNameChange, addTodo }) => {
+const AddComponent = ({ state, handleNameChange, addTodo }) => {
     return (
         <div>
-            <input type="text" onChange={handleNameChange} value={name}/>
+            <input type="text" onChange={handleNameChange} value={state.name}/>
             <button onClick={addTodo}>Добавить</button>
         </div>
     );
@@ -13,7 +13,7 @@ const AddComponent = ({ name, handleNameChange, addTodo }) => {
 AddComponent.propTypes = {
     handleNameChange: PropTypes.func.isRequired,
     addTodo: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
+    state: PropTypes.object.isRequired,
 };
 
 export default AddComponent;

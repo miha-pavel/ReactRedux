@@ -10,23 +10,24 @@ import {onAddTodo} from "../actions/index";
 class AddContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {todo: ""};
+        this.state = {name: ""};
 
         this.handleNameChange = this.handleNameChange.bind(this);
         this.addTodo = this.addTodo.bind(this);
     }
 
     handleNameChange(e) {
-        this.setState({todo: e.target.value});
+        this.setState({name: e.target.value});
     }
 
     addTodo () {
-        this.props.onAddTodo(this.state.todo);
+        this.props.onAddTodo(this.state.name);
+        this.setState({name: ""});
     }
 
     render(){
         let sendProps = {
-            state: this.state,
+            state: this.state || {name: ""},
             addTodo: this.addTodo,
             handleNameChange: this.handleNameChange
         };

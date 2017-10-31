@@ -10,8 +10,7 @@ import EditComponent from "../components/edit";
 class EditContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {todo: ""};
-
+        this.state = {name: this.props.selectedTodo.name};
         this.handleNameChange = this.handleNameChange.bind(this);
         this.saveTodo = this.saveTodo.bind(this);
     }
@@ -21,12 +20,12 @@ class EditContainer extends React.Component {
     }
 
     saveTodo () {
-        this.props.onEditTodo(this.state.todo.name, this.state.todo.id);
+        this.props.onEditTodo(this.state.name, this.props.selectedTodo.id);
     }
 
     render () {
         let sendProps = {
-            state: this.state,
+            name: this.state.name,
             saveTodo: this.saveTodo,
             handleNameChange: this.handleNameChange
         };
@@ -45,13 +44,14 @@ EditContainer.propTypes = {
 
 
 const mapStateToProps = (state) => {
-    return{
-        todo: state.todos.selectedTodo
+    return {
+        selectedTodo: state.todos.selectedTodo
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return{
+        dispatch: dispatch,
         onEditTodo: bindActionCreators(onEditTodo, dispatch),
     }
 };

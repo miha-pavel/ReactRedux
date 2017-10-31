@@ -11,7 +11,6 @@ import AddContainer from "./add";
 class TodoListContainer extends React.Component {
     constructor(props) {
         super(props);
-        // this.state = {todo: ""};
 
         this.deleteTodo = this.deleteTodo.bind(this);
         this.selectTodo = this.selectTodo.bind(this);
@@ -59,6 +58,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return{
+        dispatch: dispatch,
         onDeleteTodo: bindActionCreators(onDeleteTodo, dispatch),
         onSelectTodo: bindActionCreators(onSelectTodo, dispatch),
     }
