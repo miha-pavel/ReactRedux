@@ -5,11 +5,9 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { ConnectedRouter, routerMiddleware } from "react-router-redux";
-
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {Route} from "react-router-dom";
 
 import App from "./containers/App";
-import Edit from "./containers/Edit";
 import reducers from "./reducers";
 
 import createHistory from "history/createBrowserHistory";
@@ -25,14 +23,7 @@ const store = createStore(reducers, composed, applyMiddleware(middleware));
 ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            <div>
-                <Router>
-                    <div>
-                        <Route exact path="/" component={App}/>
-                        <Route path="/todos/:id" component={Edit}/>
-                    </div>
-                </Router>
-            </div>
+            <Route path="/" component={App}/>
         </ConnectedRouter>
     </Provider>,
     document.getElementById("root"));
