@@ -10,6 +10,14 @@ export const onAddTodo = (name) => {
 }
 
 
+export const onAddError = () => {
+    return{
+        type: "ERROR_ADD",
+        payload: "You should enter TODO note"
+    };
+}
+
+
 export const onDeleteTodo = (id) => {
     const payload = {
         id: id
@@ -37,5 +45,13 @@ export const onEditTodo = (name, id) => {
     return{
         type: "EDIT_TODO",
         payload
+    };
+}
+
+
+export const onEditError = () => {
+    return{
+        type: "ERROR_EDIT",
+        payload: "You should enter TODO note"
     };
 }

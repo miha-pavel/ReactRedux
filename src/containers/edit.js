@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { onEditTodo } from "../actions/index";
+import { onEditTodo, onEditError } from "../actions/index";
 import EditComponent from "../components/edit";
 
 
@@ -19,15 +19,20 @@ class EditContainer extends React.Component {
         this.setState({name: e.target.value});
     }
 
-    saveTodo () {
-        this.props.onEditTodo(this.state.name, this.props.selectedTodo.id);
+    saveTodo(){
+        if(this.state.name.length === 0) {
+            this.props.onEditError();
+        } else {
+            this.props.onEditTodo(this.state.name, this.props.selectedTodo.id);
+        }
     }
 
     render () {
         let sendProps = {
             name: this.state.name,
             saveTodo: this.saveTodo,
-            handleNameChange: this.handleNameChange
+            handleNameChange: this.handleNameChange,
+            errorEdit: this.props.errorEdit
         };
         return (
             <div>
@@ -45,7 +50,8 @@ EditContainer.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        selectedTodo: state.todos.selectedTodo
+        selectedTodo: state.todos.selectedTodo,
+        errorEdit: state.todos.errorEdit || ""
     }
 }
 
@@ -53,6 +59,7 @@ const mapDispatchToProps = (dispatch) => {
     return{
         dispatch: dispatch,
         onEditTodo: bindActionCreators(onEditTodo, dispatch),
+        onEditError: bindActionCreators(onEditError, dispatch),
     }
 };
 

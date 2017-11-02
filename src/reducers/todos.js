@@ -1,6 +1,8 @@
 const initialState = {
     todos: [],
-    selectedTodo: {}
+    selectedTodo: {},
+    error: "",
+    errorEdit:""
 };
 
 export default function todos(state = initialState, action){
@@ -11,7 +13,14 @@ export default function todos(state = initialState, action){
             new_array.push(action.payload);
             return {
                 ...state,
-                todos: new_array
+                todos: new_array,
+                error: ""
+            };
+
+        case "ERROR_ADD":
+            return {
+                ...state,
+                error: action.payload
             };
 
         case "DELETE_TODO":
@@ -46,9 +55,15 @@ export default function todos(state = initialState, action){
             return {
                 ...state,
                 todos: finalArray,
-                selectedTodo: newSelectedTodos
+                selectedTodo: newSelectedTodos,
+                errorEdit: ""
             }
 
+        case "ERROR_EDIT":
+            return {
+                ...state,
+                errorEdit: action.payload
+            };
 
         default:
             return state;

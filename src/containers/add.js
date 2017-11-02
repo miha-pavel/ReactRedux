@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import { bindActionCreators } from 'redux';
 
 import AddComponent from "../components/add";
-import {onAddTodo} from "../actions/index";
+import {onAddTodo, onAddError} from "../actions/index";
 
 
 class AddContainer extends React.Component {
@@ -20,17 +20,23 @@ class AddContainer extends React.Component {
         this.setState({name: e.target.value});
     }
 
-    addTodo () {
-        this.props.onAddTodo(this.state.name);
-        this.setState({name: ""});
+    addTodo(){
+        if(this.state.name.length === 0) {
+            this.props.onAddError();
+        } else {
+            this.props.onAddTodo(this.state.name);
+            this.setState({name: ""});
+        }
     }
 
     render(){
         let sendProps = {
-            state: this.state || {name: ""},
+            state: this.state,
             addTodo: this.addTodo,
-            handleNameChange: this.handleNameChange
+            handleNameChange: this.handleNameChange,
+            error: this.props.error
         };
+        console.log(sendProps);
         return (
             <div>
                 <AddComponent {...sendProps} />
@@ -42,11 +48,14 @@ class AddContainer extends React.Component {
 
 AddContainer.propTypes = {
     dispatch: PropTypes.func.isRequired,
+    error: PropTypes.string.isRequired
 };
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        error: state.todos.error || ""
+    }
 }
 
 
@@ -54,6 +63,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         dispatch: dispatch,
         onAddTodo: bindActionCreators(onAddTodo, dispatch),
+        onAddError: bindActionCreators(onAddError, dispatch),
     }
 }
 
